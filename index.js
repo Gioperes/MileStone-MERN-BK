@@ -9,6 +9,11 @@ const app = express()
 // middleware
 app.use(express.json())
 app.use(cors())
+// serve static front end in production mode
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, 'client', 'build')));
+}
+
 // routes
 
 app.use('/pin', pinRoutes)
